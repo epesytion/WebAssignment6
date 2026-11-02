@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Portfolio | jQuery Task 1</title>
+<style>
+  body {
+    font-family: Georgia, "Times New Roman", serif;
+    margin: 0;
+    padding: 40px 20px;
+    background: #f5f5f0;
+    color: #222;
+    line-height: 1.6;
+  }
+  .container { max-width: 640px; margin: 0 auto; }
+  h1 { margin: 0 0 4px; font-size: 2.2rem; }
+  .headline { font-size: 1.2rem; font-style: italic; margin: 0 0 24px; }
+  .profile {
+    padding: 20px 24px;
+    border: 2px solid #222;
+    border-radius: 6px;
+    margin-bottom: 24px;
+  }
+  .profile h2 { margin-top: 0; }
+  .skill { margin: 4px 0; }
+  .controls { display: flex; flex-wrap: wrap; gap: 10px; }
+  button {
+    font: inherit;
+    padding: 8px 16px;
+    cursor: pointer;
+    border: 2px solid #222;
+    background: transparent;
+    color: inherit;
+    border-radius: 4px;
+  }
+  button:focus-visible { outline: 3px solid #1a6fd1; outline-offset: 2px; }
+</style>
+</head>
+<body>
+  <div class="container">
+    <!-- Name, headline, intro -->
+    <h1 id="name">Your Name</h1>
+    <p id="headline" class="headline">Aspiring Web Developer</p>
+    <p id="intro">Hi! I'm learning web development and building interactive pages with jQuery.</p>
+
+    <!-- Profile section -->
+    <section id="profile" class="profile">
+      <h2 id="profile-title">Welcome to My Portfolio</h2>
+      <p>I enjoy turning ideas into working websites. Here are some things I'm learning:</p>
+      <p class="skill">HTML &amp; CSS</p>
+      <p class="skill">JavaScript</p>
+      <p class="skill">jQuery</p>
+    </section>
+
+    <!-- Buttons -->
+    <div class="controls">
+      <button id="btn-greeting">Change greeting</button>
+      <button id="btn-headline">Change headline</button>
+      <button id="btn-highlight">Highlight skills</button>
+      <button id="btn-light">Light theme</button>
+      <button id="btn-dark">Dark theme</button>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+
+      // --- Selectors: tag, ID, class ---
+      // Tag selector: style every <h2>
+      $("h2").css("text-decoration", "underline");
+
+      // Class selector: give all skills a left indent
+      $(".skill").css("padding-left", "16px");
+
+      // ID selector: style the profile box
+      $("#profile").css("background-color", "#ffffff");
+
+      // --- .text() : update the headline and profile title ---
+      $("#btn-headline").click(function () {
+        $("#headline").text("Front-End Developer in Training");
+      });
+
+      // --- .html() : update the intro with markup ---
+      $("#btn-greeting").click(function () {
+        $("#profile-title").text("Thanks for visiting!");
+        $("#intro").html("Hello! I'm <strong>learning jQuery</strong> and this page was updated with <em>.html()</em>.");
+      });
+
+      // --- .css() : change the styling of selected elements ---
+      $("#btn-highlight").click(function () {
+        $(".skill").css({
+          "background-color": "#ffe27a",
+          "color": "#222",
+          "font-weight": "bold"
+        });
+      });
+
+      // --- Theme switching ---
+      function setTheme(theme) {
+        if (theme === "dark") {
+          $("body").css({ "background-color": "#1b1b1f", "color": "#eaeaea" });
+          $("#profile").css({ "background-color": "#2a2a31", "border-color": "#eaeaea" });
+          $("button").css("border-color", "#eaeaea");
+        } else {
+          $("body").css({ "background-color": "#f5f5f0", "color": "#222" });
+          $("#profile").css({ "background-color": "#ffffff", "border-color": "#222" });
+          $("button").css("border-color", "#222");
+        }
+      }
+
+      $("#btn-light").click(function () { setTheme("light"); });
+      $("#btn-dark").click(function () { setTheme("dark"); });
+    });
+  </script>
+</body>
+</html>
